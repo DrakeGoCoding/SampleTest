@@ -98,3 +98,13 @@ section{
     height: 25px; width: 70px;
     padding: 10px 20px 10px 0;
 }
+
+@media screen and (max-width: 480px) {
+    .quiz {
+        font-size: 20px;
+    }
+
+    .quiz-zone{
+        font-size: 16px;
+    }
+}
