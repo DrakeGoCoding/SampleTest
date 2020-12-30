@@ -12,10 +12,14 @@ router
             redirect('register')
         },
         'recipe': function () {
-            redirect('recipe')
+            const check = await checkAuthen();
+            if (check)
+                redirect('recipe')
+            else
+                router.navigate('login')
         },
         '*': function () {
-            router.navigate('login')
+            router.navigate('recipe')
         }
     })
     .resolve();
@@ -35,3 +39,19 @@ function redirect(screenName) {
         `
     }
 }
+
+async function checkAuthen() {
+    const user = getItemFromLocalStorage('currentUser');
+    if (user) {
+        const res = await firebase.firestore()
+            .collection('users')
+            .where('userName', '==', user.userName)
+            .where('password', '==', user.password)
+            .get()
+        if (res.empty) return false;
+        return true;
+    }
+    return false;
+}
+
+window.router = router
