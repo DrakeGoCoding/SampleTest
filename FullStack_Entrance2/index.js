@@ -1,43 +1,6 @@
-import * as Problem from "./problem.js"
+import "./problem.js"
 
-const arr1 = [1, 2, "a"]
-const arr2 = [1, 3, "b"]
-console.log(Problem.removeDupFrom2Array(arr1, arr2));
-
-const teamList = [
-    {
-        name: 'Arsenal',
-        points: 99,
-        GD: 45
-    },
-    {
-        name: 'Chelsea',
-        points: 75,
-        GD: 39
-    },
-    {
-        name: 'Manchester United',
-        points: 60,
-        GD: 29
-    },
-    {
-        name: 'Liverpool',
-        points: 88,
-        GD: 39
-    }
-]
-console.log(Problem.sortRank(teamList));
-
-function shuffleArray(array) {
-    let j, tmp;
-    for (let i = array.length - 1; i >= 0; i--) {
-        j = Math.floor(Math.random() * (i + 1));
-        tmp = array[i];
-        array[i] = array[j];
-        array[j] = tmp;
-    }
-    return array;
-}
+import { shuffleArray } from './utils.js'
 
 const QUIZSET = [
     {
@@ -107,6 +70,7 @@ class QuizGame {
     endGame() {
         quizZoneParent.style.display = "none";
         quizIntro.style.filter = "blur(0px)";
+        alert(`Game Over.\nResult: ${correctAnswerCount}/${this.quizSet.length}`)
     }
 
     displayQuiz(index, quiz) {
@@ -126,9 +90,7 @@ class QuizGame {
         if (currentQuiz)
             this.displayQuiz(quizIndex++, currentQuiz);
         else
-            quizZoneQuestion.innerHTML = `
-                Results: ${correctAnswerCount}/${this.quizSet.length}
-            `
+            this.endGame();
     }
 
     checkAnswer(quiz, userAnswer) {

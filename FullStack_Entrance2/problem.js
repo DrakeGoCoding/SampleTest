@@ -29,3 +29,31 @@ export function sortRank(teamList) {
     }
     return newTeamList;
 }
+
+const arr1 = [1, 2, "a"]
+const arr2 = [1, 3, "b"]
+console.log(removeDupFrom2Array(arr1, arr2));
+
+const teamList = [
+    {
+        name: 'Arsenal',
+        points: 99,
+        GD: 45
+    },
+    {
+        name: 'Chelsea',
+        points: 75,
+        GD: 39
+    },
+    {
+        name: 'Manchester United',
+        points: 60,
+        GD: 29
+    },
+    {
+        name: 'Liverpool',
+        points: 88,
+        GD: 39
+    }
+]
+console.log(sortRank(teamList));
