@@ -205,7 +205,7 @@ nextBtn.addEventListener("click", () => {
 })
 
 answerBtns.forEach(button => {
-    button.addEventListener("dblclick", () => {
+    button.addEventListener("click", () => {
         if (!isChosen) {
             currentAnswerBtn = button;
             currentAnswer = button.children[0].innerHTML;
