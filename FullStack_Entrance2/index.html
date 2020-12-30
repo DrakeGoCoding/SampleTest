@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +9,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
+
 <body>
-    
+
     <div id="main-container">
         <section>
             <div class="quiz-intro">
@@ -17,42 +19,24 @@
                 <br>
                 <div class="intro">You think you're a sport nerd? Try to beat these quizzes</div>
                 <br>
-                <button type="button" class="start-button">START</button>
+                <button type="button" id="start-button">START</button>
             </div>
         </section>
 
-        <div class="quiz-zone-parent">
+        <div class="quiz-container">
             <div class="quiz-zone animate">
-                <div class="quiz-zone-question">
-                    <div class="quiz-count"></div> <br>
-                    <div class="quiz"></div> <br>
-                    <div class="quiz-answer-zone">
-                        <div class="quiz-container">
-                            <div class="quiz-answer">
-
-                            </div>
-                        </div>
-                        <div class="quiz-container">
-                            <div class="quiz-answer">
-                                
-                            </div>
-                        </div>
-                        <div class="quiz-container">
-                            <div class="quiz-answer">
-
-                            </div>
-                        </div>
-                        <div class="quiz-container">
-                            <div class="quiz-answer">
-
-                            </div>
-                        </div>
-                    </div>
+                <div id="quiz-count"></div> <br>
+                <div id="quiz-title"></div> <br>
+                <div id="quiz-answers">
+                    <div class="answer-container"></div>
+                    <div class="answer-container"></div>
+                    <div class="answer-container"></div>
+                    <div class="answer-container"></div>
                 </div>
 
                 <div class="bottom-container">
-                    <div class="next-button">NEXT</div>
-                    <div class="quiz-result"></div>
+                    <div id="next-button">NEXT</div>
+                    <div id="quiz-result"></div>
                 </div>
 
                 <span class="X" draggable="true">&times;</span>
@@ -62,4 +46,5 @@
 
     <script src="index.js" type="module"></script>
 </body>
+
 </html>
