@@ -47,6 +47,8 @@ const QUIZSET = [
 
 class QuizGame {
     quizSet;
+    quizIndex;
+    correctAnswerCount;
 
     /**
      * 
@@ -62,8 +64,10 @@ class QuizGame {
     }
 
     startGame() {
-        quizIndex = 0;
-        correctAnswerCount = 0;
+        quizZoneParent.style.display = "block";
+        quizIntro.style.filter = "blur(5px)";
+        this.quizIndex = 0;
+        this.correctAnswerCount = 0;
         this.shuffleQuiz();
         this.nextQuiz();
     }
@@ -71,7 +75,7 @@ class QuizGame {
     endGame() {
         quizZoneParent.style.display = "none";
         quizIntro.style.filter = "blur(0px)";
-        alert(`Game Over.\nResult: ${correctAnswerCount}/${this.quizSet.length}`)
+        alert(`Game Over.\nResult: ${this.correctAnswerCount}/${this.quizSet.length}`)
     }
 
     displayQuiz(index, quiz) {
@@ -87,9 +91,9 @@ class QuizGame {
 
     nextQuiz() {
         this.prepareNextQuiz();
-        currentQuiz = this.quizSet[quizIndex];
+        currentQuiz = this.quizSet[this.quizIndex];
         if (currentQuiz)
-            this.displayQuiz(quizIndex++, currentQuiz);
+            this.displayQuiz(this.quizIndex++, currentQuiz);
         else
             this.endGame();
     }
@@ -98,10 +102,10 @@ class QuizGame {
         return userAnswer === quiz.correct_answer;
     }
 
-    showAnswer(quiz, userAnswer) {
+    showResult(quiz, userAnswer) {
         let isCorrectAnswer = this.checkAnswer(quiz, userAnswer);
         if (isCorrectAnswer) {
-            correctAnswerCount++;
+            this.correctAnswerCount++;
             currentAnswerBtn.style.background = "#2095F3";
             currentAnswerBtn.style.color = "white";
             quizResult.innerHTML = "Correct!";
@@ -134,45 +138,30 @@ let quizBottomContainer = document.querySelector(".bottom-container");
 let startGameBtn = document.querySelector("#start-button");
 let answerBtns = document.querySelectorAll(".answer-container");
 let nextBtn = document.querySelector("#next-button");
-let exitBtn = document.querySelector(".X");
+let exitBtn = document.querySelector("#X");
 
 let quizTitle = document.querySelector("#quiz-title");
 let quizCount = document.querySelector("#quiz-count");
 let quizResult = document.querySelector("#quiz-result");
 
-let quizIndex = 0;
-let correctAnswerCount = 0;
 let isChosen = false;
 
 let currentQuiz;
 let currentAnswer;
 let currentAnswerBtn;
 
-let quizGame;
+let quizGame = new QuizGame(QUIZSET);
 
-startGameBtn.addEventListener("click", () => {
-    quizGame = new QuizGame(QUIZSET);
-    quizZoneParent.style.display = "block";
-    quizIntro.style.filter = "blur(5px)";
-    quizGame.startGame();
-});
-
-exitBtn.addEventListener("click", () => {
-    quizZoneParent.style.display = "none";
-    quizIntro.style.filter = "blur(0px)";
-    quizGame.endGame();
-});
-
-nextBtn.addEventListener("click", () => {
-    quizGame.nextQuiz();
-})
+startGameBtn.addEventListener("click", () => quizGame.startGame());
+exitBtn.addEventListener("click", () => quizGame.endGame());
+nextBtn.addEventListener("click", () => quizGame.nextQuiz());
 
 answerBtns.forEach(button => {
     button.addEventListener("click", () => {
         if (!isChosen) {
             currentAnswerBtn = button;
             currentAnswer = button.innerHTML;
-            quizGame.showAnswer(currentQuiz, currentAnswer);
+            quizGame.showResult(currentQuiz, currentAnswer);
             isChosen = true;
         }
     })
