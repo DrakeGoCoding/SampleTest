@@ -98,24 +98,23 @@ class QuizGame {
         this.quizSet.forEach(quiz => shuffleArray(quiz.incorrect_answers));
     }
 
-    startGame(){
+    startGame() {
         quizIndex = 0;
         correctAnswerCount = 0;
         this.nextQuiz();
     }
 
-    endGame(){
+    endGame() {
         quizZoneParent.style.display = "none";
         quizIntro.style.filter = "blur(0px)";
-        alert(`Game Over.\n Results: ${correctAnswerCount}/${this.quizSet.length}`)
     }
 
-    displayQuiz(index, quiz){
+    displayQuiz(index, quiz) {
         index += 1;
         quizCount.innerHTML = `Quiz: ${index}/${this.quizSet.length}`;
         quizTitle.innerHTML = quiz.question;
         const answers = shuffleArray(quiz.incorrect_answers.concat(quiz.correct_answer));
-        for (let i = 0 ; i < answerBtns.length; i++){
+        for (let i = 0; i < answerBtns.length; i++) {
             let answerBtn = answerBtns[i];
             answerBtn.children[0].innerHTML = answers[i];
         }
@@ -127,7 +126,9 @@ class QuizGame {
         if (currentQuiz)
             this.displayQuiz(quizIndex++, currentQuiz);
         else
-            this.endGame();
+            quizZoneQuestion.innerHTML = `
+                Results: ${correctAnswerCount}/${this.quizSet.length}
+            `
     }
 
     checkAnswer(quiz, userAnswer) {
