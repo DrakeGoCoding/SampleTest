@@ -56,7 +56,7 @@ class QuizGame {
         this.quizSet = quizSet;
     }
 
-    shuffleQuestion() {
+    shuffleQuiz() {
         this.quizSet = shuffleArray(this.quizSet);
         this.quizSet.forEach(quiz => shuffleArray(quiz.incorrect_answers));
     }
@@ -64,6 +64,7 @@ class QuizGame {
     startGame() {
         quizIndex = 0;
         correctAnswerCount = 0;
+        this.shuffleQuiz();
         this.nextQuiz();
     }
 
