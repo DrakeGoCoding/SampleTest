@@ -79,8 +79,7 @@ class QuizGame {
     }
 
     displayQuiz(index, quiz) {
-        index += 1;
-        quizCount.innerHTML = `Quiz: ${index}/${this.quizSet.length}`;
+        quizCount.innerHTML = `Quiz: ${++index}/${this.quizSet.length}`;
         quizTitle.innerHTML = quiz.question;
         const answers = shuffleArray(quiz.incorrect_answers.concat(quiz.correct_answer));
         for (let i = 0; i < answerBtns.length; i++) {
@@ -121,11 +120,8 @@ class QuizGame {
     prepareNextQuiz() {
         isChosen = false;
         quizZone.classList.remove("animate");
-        answerBtns.forEach(button => {
-            let oldButton = button.setAttribute('style', '');
-            return oldButton;
-        });
         quizZone.classList.add("animate");
+        answerBtns.forEach(button => button.setAttribute('style', ''));
         quizBottomContainer.style.display = "none";
     }
 }
