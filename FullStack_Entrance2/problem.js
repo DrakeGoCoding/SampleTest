@@ -24,8 +24,7 @@ const arr1 = [1, 2, "a"]
 const arr2 = [1, 3, "b"]
 console.log(removeDupFrom2Array(arr1, arr2));
 
-const teamList = [
-    {
+const teamList = [{
         name: 'Arsenal',
         points: 99,
         GD: 45
